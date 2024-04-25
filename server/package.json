@@ -1,0 +1,25 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "SMC Study App backend that provides a REST API for retrieving Scripture texts as well as reading and writing to an annotation database",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FateMeetsLuck/smcstudyapp.git"
+  },
+  "keywords": [
+    "ub"
+  ],
+  "author": "FateMeetsLuck",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/FateMeetsLuck/smcstudyapp/issues"
+  },
+  "homepage": "https://github.com/FateMeetsLuck/smcstudyapp#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

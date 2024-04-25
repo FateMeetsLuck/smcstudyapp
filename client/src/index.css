@@ -1,17 +1,6 @@
-
-body, h1, h2, p, ul {
-  margin: 0;
-  padding: 0;
-}
-
 body {
   font-family: Arial, sans-serif;
-}
-
-header, footer {
-  background-color: #f8f9fa;
-  text-align: center;
-  padding: 10px 0;
+  margin: 10px;
 }
 
 nav ul {
@@ -23,41 +12,83 @@ nav ul li {
   margin-right: 20px;
 }
 
+nav ul li a:link {
+  color:firebrick;
+  text-decoration: none;
+}
+
 .container {
-  display: flex;
-  /* min-height: 600px; Adjust based on content */
-  width: 100%;
+  display: grid;
+  grid-template-columns: 80% 20%;
+  grid-template-rows: auto 1fr auto;
+  height: 100vh;
+  grid-template-areas: 
+    "header header"
+    "content sidebar"
+    "footer footer";
+}
+
+.header {
+  grid-area: header;
+  text-align: center;
+}
+
+.content {
+  grid-area: content;
+  overflow: auto;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 1.25em;
+  padding: 10px;
 }
 
 .sidebar {
-  /* flex-basis: 40%; */
-  flex: 1;
-  background-color: #e9ecef;
-  padding: 20px;
-  flex-shrink: 1;
+  grid-area: sidebar;
+  border-left: 1px solid #ccc;
+  overflow: auto;
+  padding: 5px;
 }
 
-.passage {
-  /* flex-basis: 60%; */
-  flex: 1;
-  padding: 20px;
+.footer {
+  grid-area: footer;
+  height: 150px;
+  overflow: auto;
+  padding: 10px;
 }
 
-.passage small {
-  color:cadetblue;
+/* for the reference text numbering system that introduces paragraphs */
+.reftext {
+  font-size: 0.75em;
+  color: dimgray;
+  margin-right: 4em;
 }
 
-.passage .content {
-  margin-left: 4em;
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  font-size: large;
-}
-
-footer {
-  background-color: #f8f9fa;
+/* copyright notice that remains at the bottom */
+.copyright {
+  grid-area: copyright;
+  height: 50px;
+  background-color: #f3f3f3;
+  color: #606;
   text-align: center;
-  padding: 10px 0;
+  line-height: 50px;
   position: fixed;
-  width: 100%;
   bottom: 0;
+  width: 100%;
+}
+
+/* CSS import of Google font 'Permanent Marker' */
+.permanent-marker-regular {
+  font-family: "Permanent Marker", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 3em;
+}
+
+/* CSS import of Google font 'Cinzel' for the nav bar */
+
+.cinzel-nav {
+  font-family: "Cinzel", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1.25em;
 }
