@@ -1,25 +1,29 @@
 import { useState, useEffect } from 'react'
 
-const ScriptureText = ({paperId, sectionId, paragraphId}) => {
+const ScriptureText = ({selection}) => {
     const [content, setContent] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
+    console.log("Selection: ", selection);
+    const {paperId, sectionId, paragraphId, partId} = selection;
+
     useEffect(() => {
         const fetchData = async () => {
-            if(!paperId) {
-                setError('Paper ID is required');
-                return;
-            }
             setIsLoading(true);
             setError(null);
             try {
-                const queryParams = new URLSearchParams({
-                    paperId: paperId,
-                    ...(sectionId && { sectionId: sectionId }),
-                    ...(paragraphId && { paragraphId: paragraphId})
-                }).toString();
-                const response = await fetch(`http://localhost:3001/api/ub?${queryParams}`);
+                let queryParams = new URLSearchParams();
+                if(partId) {
+                    queryParams.append("partId", partId);
+                } else {
+                    if(paperId === 0 || paperId) queryParams.append("paperId", paperId);
+                    if(sectionId === 0 || sectionId ) queryParams.append("sectionId", sectionId);
+                    if(paragraphId) queryParams.append("paragraphId", paragraphId);
+                }
+
+                console.log("Attempting to query the REST API with ", queryParams.toString());
+                const response = await fetch(`http://localhost:3001/api/ub?${queryParams.toString()}`);
                 if(!response.ok) {
                     throw new Error('Could not fetch data');
                 }
@@ -33,19 +37,41 @@ const ScriptureText = ({paperId, sectionId, paragraphId}) => {
         };
 
         fetchData();
-    }, [paperId, sectionId, paragraphId]);
+    }, [paperId, sectionId, paragraphId, partId]);
 
-    if(isLoading) return <div>&lt;Loading text...&gt;</div>;
     if(error) return <div className='error-message'>&lt;Error loading text: {error}&gt;</div>;
+    if(isLoading) return <div>&lt;Loading text...&gt;</div>;
+
+    // if this is not an array, such as when pulling individual passages, turn it back into an array here
+    if(!Array.isArray(content))
+        setContent([content]);
+
+    if(partId) {
+        const partContent = content[0];
+        return (
+            <div className='left-content'>
+                <h2>{partContent?.partTitle || 'Part Title'}</h2>
+                <p>{partContent?.partSponsorship || 'No text available for this part.'}</p>
+            </div>
+        );
+    }
 
     const organizedContent = content.reduce((acc, item) => {
         const sectionKey = item.sectionId || 'general';
         if(!acc[sectionKey]) {
-            acc[sectionKey] = {
-                title: item.sectionId === "0" ? null : (item.sectionId ? `${item.sectionId}. ${item.sectionTitle || "No Title"}` : null),
-                paragraphs: []
-            };
+            if(item.paperId === "0") {
+                acc[sectionKey] = {
+                    title: item.sectionId !== 0? item.sectionTitle : null,
+                    paragraphs: []
+                };
+            } else {
+                acc[sectionKey] = {
+                    title: item.sectionId && item.sectionId !== "0" ? `${item.sectionId}. ${item.sectionTitle || "No Title"}` : null,
+                    paragraphs: []
+                };
+            }
         }
+
         if(item.text) {
             acc[sectionKey].paragraphs.push({
                 text: item.text,
@@ -57,7 +83,7 @@ const ScriptureText = ({paperId, sectionId, paragraphId}) => {
 
     return (
         <div className='left-content'>
-            <h2>Paper {paperId}: {content[0]?.paperTitle || 'No Title Available'}</h2>
+            <h2>{paperId!==0 && `Paper ${paperId} `}{content[0]?.paperTitle}</h2>
             {Object.values(organizedContent).map((section, index)=> (
                 <div key={index}>
                     {section.title && <h3>{section.title}</h3>}
