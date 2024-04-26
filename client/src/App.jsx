@@ -1,33 +1,20 @@
-import FooterAnnotation from './FooterAnnotation.jsx'
-import Header from './Header.jsx'
-import MainContent from './MainContent.jsx';
-import Sidebar from './Sidebar.jsx';
+import Navbar from "./Navbar";
+import ScriptureText from "./ScriptureText";
 
 function App() {
+    const paperId = 5;
+    const sectionId = 3;
+    const paragraphId = 2;
     return (
       <>
-        <div className="container">
-          <div className="header">
-            <Header />
-          </div>
-          <div className="content">
-            <MainContent />
-            <MainContent />
-            <MainContent />
-            <MainContent />
-            <MainContent />
-          </div>
-          <div className="sidebar">
-            <Sidebar />
-          </div>
-          <div className="footer">
-            <FooterAnnotation />
-          </div>
-        </div>
-        {/* Copyright notice */}
-        <div className='copyright'>
-          &copy; FateMeetsLuck {(new Date()).getFullYear()}
-        </div>
+        <header className='permanent-marker-regular'>
+          <h1>Second Mile Christian Study App</h1>
+        </header>
+        <Navbar />
+        <ScriptureText paperId={paperId} sectionId={sectionId} paragraphId={paragraphId} />
+        <footer>
+          <p>&copy; FateMeetsLuck {(new Date()).getFullYear()}</p>
+        </footer>
       </>
     );
 }

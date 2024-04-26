@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/FateMeetsLuck/smcstudyapp#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.19.2"
   }
 }
