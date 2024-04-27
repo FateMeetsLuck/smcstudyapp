@@ -32,7 +32,7 @@ function App() {
         {dropdownVisible && <DropdownMenu onSelect={handleSelection} />}
         <MainContainer selection={selection}/>
         <footer>
-          <p>&copy; FateMeetsLuck {(new Date()).getFullYear()}</p>
+          <p>This software is licensed under GPL3</p>
         </footer>
       </>
     );
