@@ -2,7 +2,7 @@
 
 ## Description
 
-This requires Node.js (and eventually MongoDB) to build and test locally. At the moment the application can only view text from the Urantia Book but soon it will be possible to add annotations.
+This requires Node.js (and eventually MongoDB) to build and test locally. At the moment the application can only view text from the Urantia Book but soon it will be possible to view other religious texts and add annotations to them.
 
 ## Building the client UI
 
