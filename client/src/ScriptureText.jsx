@@ -1,12 +1,63 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
-const ScriptureText = ({selection}) => {
+function getCharacterOffsetWithin(element, child) {
+    let offset = 0;
+    if(child.nodeType === Node.TEXT_NODE) {
+        let node = child;
+        while(node.previousSibling) {
+            node = node.previousSibling;
+            offset += node.textContent.length;
+        }
+    }
+    return offset;
+}
+
+const ScriptureText = ({selection, onTextSelect}) => {
     const [content, setContent] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    console.log("Selection: ", selection);
+    // console.log("Selection: ", selection);
     const {paperId, sectionId, paragraphId, partId} = selection;
+
+    // handle highlighting of text
+    const handleMouseUp = () => {
+        const selection = window.getSelection();
+        if(!selection.isCollapsed && selection.rangeCount > 0) {
+            const range = selection.getRangeAt(0);
+            let startNode = range.startContainer;
+            let endNode = range.endContainer;
+            while(startNode && startNode.nodeType !== Node.ELEMENT_NODE) {
+                startNode = startNode.parentNode;
+            }
+
+            while(endNode && endNode.nodeType !== Node.ELEMENT_NODE) {
+                endNode = endNode.parentNode;
+            }
+            
+            if(startNode && endNode) {
+                const startOffset = range.startOffset + getCharacterOffsetWithin(startNode, range.startContainer) + range.startOffset;
+                const endOffset = range.startOffset + getCharacterOffsetWithin(endNode, range.endContainer) + range.endOffset;
+                
+                const startRef = startNode.dataset.id;
+                const endRef = endNode.dataset.id;
+
+                const highlightDetails = {
+                    startRef: startRef,
+                    startOffset: startOffset,
+                    endRef: endRef,
+                    endOffset: endOffset,
+                    text: selection.toString()
+                };
+
+                onTextSelect(highlightDetails);
+                selection.removeAllRanges();
+            } else {
+                console.error("Selection did not occur in valid passage range");
+            }
+
+        }
+    };
 
     useEffect(() => {
         const fetchData = async () => {
@@ -22,7 +73,7 @@ const ScriptureText = ({selection}) => {
                     if(paragraphId) queryParams.append("paragraphId", paragraphId);
                 }
 
-                console.log("Attempting to query the REST API with ", queryParams.toString());
+                // console.log("Attempting to query the REST API with ", queryParams.toString());
                 const response = await fetch(`http://localhost:3001/api/ub?${queryParams.toString()}`);
                 if(!response.ok) {
                     throw new Error('Could not fetch data');
@@ -81,16 +132,17 @@ const ScriptureText = ({selection}) => {
         return acc;
     }, {});
 
+    console.log("organizedContent: ", organizedContent);
     return (
-        <div className='left-content'>
-            <h2>{paperId!==0 && `Paper ${paperId} `}{content[0]?.paperTitle}</h2>
+        <div className='left-content' onMouseUp={handleMouseUp}>
+            <h2 className='unselectable-header'>{paperId!==0 && `Paper ${paperId} `}<br/>{content[0]?.paperTitle}</h2>
             {Object.values(organizedContent).map((section, index)=> (
                 <div key={index}>
-                    {section.title && <h3>{section.title}</h3>}
+                    {section.title && <h3 className='unselectable-header'>{section.title}</h3>}
                     {section.paragraphs.map((para, paraIndex) => (
                         <p key={paraIndex}>
-                            <span className='ref-number'>{para.ref}</span>
-                            <span className='tab-margin'>{para.text}</span>
+                            <span className='ref-number' unselectable='on'>{para.ref}</span>
+                            <span  data-id={para.ref}>{para.text}</span>
                         </p>
                     ))}
                 </div>

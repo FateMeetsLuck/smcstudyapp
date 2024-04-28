@@ -1,6 +1,7 @@
-import { useState } from 'react';
-import ScriptureText from './ScriptureText';
-import NoteViewer from './NoteViewer';
+import { useState } from 'react'
+import ScriptureText from './ScriptureText'
+import SectionNotes from './SectionNotes'
+import NoteViewer from './NoteViewer'
 
 const MainContainer = ({selection}) => {
     const [selectedAnnotation, setSelectedAnnotation] = useState(null);
@@ -14,14 +15,20 @@ const MainContainer = ({selection}) => {
         setSelectedAnnotation(annotation);
     };
 
+    const onTextSelect = (textSelection) => {
+        console.log("User selected text: ", textSelection);
+    }
+
     return (
         <div className='container'>
             <ScriptureText 
                 selection={selection}
+                onTextSelect={onTextSelect}
             />
             {selectedAnnotation && (
                 <NoteViewer annotation={selectedAnnotation} onClose={closeNoteViewer} />
             )}
+            <SectionNotes />
         </div>
     );
 }

@@ -115,11 +115,24 @@ nav ul li {
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1440px;
   margin: 0 auto;
   overflow: hidden;
   padding: 20px;
   box-sizing: border-box;
+}
+
+.container h2 {
+  text-align: center;
+  padding: 15px;
+}
+
+.unselectable-header {
+  user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  cursor: default;
 }
 
 .text-container {
@@ -131,7 +144,7 @@ nav ul li {
   flex: 1;
   overflow-y: auto;
   min-width: 300px;
-  display: none;
+  padding: 20px;
 }
 
 .note-viewer.active {
@@ -197,8 +210,10 @@ nav ul li {
 .ref-number {
   font-weight: lighter;
   color: gray;
-  margin-right: 5px;
+  margin-right: 35px;
   font-size: small;
+  user-select: none;
+  pointer-events: none;
 }
 
 .tab-margin {
