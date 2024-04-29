@@ -1,0 +1,55 @@
+.toc-container {
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    background-color: rgb(240, 240, 240);
+    column-count: 3;
+    column-gap: 40px;
+}
+
+@media(max-width: 600px) {
+    .toc-container {
+      column-count: 1;
+    }
+}
+
+.toc-container ul {
+    width: 100%;
+    list-style-type: none;
+    padding: 0;
+}
+
+.toc-container li {
+    margin: 10px;
+    cursor: pointer;
+    break-inside: avoid;
+    padding: 10px;
+}
+
+.toc-container h2, .toc-container h3 {
+    margin: 5px 0;
+    color: navy;
+    font-size: smaller;
+}
+
+.section-item {
+    padding: 5px;
+    margin: 2px;
+    background-color: lightblue;
+    border: 1px solid gray;
+    cursor: pointer;
+}
+
+.part-container {
+    display: block;
+}
+
+.sections-list {
+    display: flex;
+}
+
+.toc-container p {
+    font-size: smaller;
+    color: gray;
+}

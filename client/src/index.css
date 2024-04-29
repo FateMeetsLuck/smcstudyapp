@@ -127,14 +127,6 @@ nav ul li {
   padding: 15px;
 }
 
-.unselectable-header {
-  user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  -moz-user-select: none;
-  cursor: default;
-}
-
 .text-container {
   flex: 0 0 66.66%;
   overflow-y: auto;
@@ -207,18 +199,7 @@ nav ul li {
   padding: 20px;
 }
 
-.ref-number {
-  font-weight: lighter;
-  color: gray;
-  margin-right: 35px;
-  font-size: small;
-  user-select: none;
-  pointer-events: none;
-}
 
-.tab-margin {
-  margin-left: 30px;
-}
 
 footer {
   background-color: #333;

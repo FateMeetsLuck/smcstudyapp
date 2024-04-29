@@ -1,0 +1,19 @@
+.notes {
+    flex: 1;
+    overflow-y: auto;
+    min-width: 300px;
+    padding: 20px;
+    border-left: 1px;
+    border-color: dimgrey;
+}
+
+@media(max-width: 800px) {
+
+    .notes {
+      flex: none;
+      width: 100%;
+      margin-right: 0;
+      height: auto;
+    }
+
+}

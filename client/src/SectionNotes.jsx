@@ -1,11 +1,13 @@
-import { useState } from 'react'
+/**
+ * Displays the general per-section or per-chapter notes.
+ */
 
-const SectionNotes = ({notes, onAddNote}) => {
+import "./styles/section-notes.css"
 
+const SectionNotes = ({ bookTitle, referenceId }) => {
     return (
-        <div className='note-viewer'>
-            <h2>Notes</h2>
-            <p>"Place holder blah blah blah"</p>
+        <div className="notes">
+            <p>Here we will display the notes for {bookTitle}, {referenceId}</p>
         </div>
     );
 }

@@ -1,0 +1,22 @@
+.ub-text { /* styles the text */
+    flex: 2;
+    padding: 20px;
+    border-right: 2px solid #bcc;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    line-height: 2;
+}
+
+.ub-text h3,
+.ub-text h2 {
+    user-select: none;
+}
+
+.ub-ref { /* styles the UB standard reference text next to each paragraph */
+    font-weight: lighter;
+    color: gray;
+    margin-right: 35px;
+    font-size: small;
+    user-select: none;
+    pointer-events: none;
+}
+
