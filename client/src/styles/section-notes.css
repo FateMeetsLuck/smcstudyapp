@@ -3,8 +3,25 @@
     overflow-y: auto;
     min-width: 300px;
     padding: 20px;
+    margin-top: 80px;
     border-left: 1px;
     border-color: dimgrey;
+}
+
+.notes-content.edit-mode {
+  border: 5px solid red;
+}
+
+.notes-content {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 1.2em;
+}
+
+div.notes-content[contenteditable=true] {
+  border: 1px dotted blue;
 }
 
 @media(max-width: 800px) {

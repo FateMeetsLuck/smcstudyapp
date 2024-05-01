@@ -47,7 +47,7 @@ const UBText = ({ referenceId }) => {
                 queryParams.append("sectionId", sectionId);
 
                 console.log("Attempting to query the REST API with ", queryParams.toString());
-                const response = await fetch(`http://localhost:3001/api/ub?${queryParams.toString()}`);
+                const response = await fetch(`http://localhost:3001/ub?${queryParams.toString()}`);
                 if(!response.ok) {
                     throw new Error('Could not fetch data');
                 }
@@ -97,7 +97,7 @@ const UBText = ({ referenceId }) => {
                 <h3>{sectionTitle}</h3>
             }
 
-            {content.map((item)=>item.text && <p>
+            {content.map((item)=>item.text && <p key={item.standardReferenceId}>
                 <span className='ub-ref'>{item.standardReferenceId}</span>
                 <span data-id={item.standardReferenceId} dangerouslySetInnerHTML={{__html: item.htmlText}}></span>
             </p>)}

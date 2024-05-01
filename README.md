@@ -2,15 +2,23 @@
 
 ## Description
 
-This requires Node.js (and eventually MongoDB) to build and test locally. At the moment the application can only view text from the Urantia Book but soon it will be possible to view other religious texts and add annotations to them.
+The goal of this web application is to allow users to view and annotate various religious texts. It is currently in the pre-alpha state of development and updates may break compatibility at any time.
 
-## Building the client UI
+It requires Node.js, and MongoDB running on localhost port 27017 to build and test locally. At the moment, the only features are the ability to view the text of the Urantia Book section by section and store and write notes for each section on the side. Everything is configured to run off of `localhost` until a configuration system is implemented. Multi-colored highlighted notes will be implemented later, as well as the ability to view and annotate numerous other religious texts such as the World English Bible stored in the *.usfm format.
 
-Change to the client/ directory and run `npm start` to load the user interface webpage. By default this will run on your local machine on port 3000 so in a browser you can access it by going to http://localhost:3000 if npm doesn't automatically launch your default browser.
+# Testing the software
+
+## Setting up the notes database in MongoDB
+
+First, MongoDB needs to be running on your local machine on port 27017. Run the database setup script in the server/ directory with the `npm run setup-db` to ensure that MongoDB creates a database for storing the notes. This setup script only has to be run once to create the database.
 
 ## Running the UB text server locally
 
-Change to the server/ directory and run `npm start`. This runs on port 3001 and the API can be called from a browser by GET requests such as `http://localhost:3001/api/ub?paperId=192&sectionId=3&paragraphId=3`. This has to be running for the client UI to pull text from the UB text database.
+Change to the server/ directory and run `npm start`. This runs on port 3001 and the API can be called from a browser by GET requests such as `http://localhost:3001/api/ub?paperId=192&sectionId=3&paragraphId=3`. This has to be running for the client UI to pull text from the JSON or usfm files and associated notes from the MongoDB databases.
+
+## Building and running the client UI
+
+Change to the client/ directory and run `npm start` to load the user interface webpage. By default this will run on your local machine on port 3000 so in a browser you can access it by going to http://localhost:3000 if npm doesn't automatically launch your default browser.
 
 ## Explanation of the software license
 

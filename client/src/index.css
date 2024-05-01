@@ -181,6 +181,12 @@ nav ul li {
   font-family: 'Courier New', Courier, monospace;
 }
 
+.loading-message {
+  color: blue;
+  font-weight: bold;
+  font-family: 'Courier New', Courier, monospace;
+}
+
 .main-content {
   display: flex;
   padding: 20px;
