@@ -47,7 +47,7 @@ const UBText = ({ referenceId }) => {
                 queryParams.append("sectionId", sectionId);
 
                 console.log("Attempting to query the REST API with ", queryParams.toString());
-                const response = await fetch(`http://localhost:3001/ub?${queryParams.toString()}`);
+                const response = await fetch(`http://localhost:3001/api/ub?${queryParams.toString()}`);
                 if(!response.ok) {
                     throw new Error('Could not fetch data');
                 }

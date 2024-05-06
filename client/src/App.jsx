@@ -51,7 +51,7 @@ const App = () => {
 
         <div className='container'>
           {selectedText?.title === BOOK_TITLE.UB && <UBText referenceId={selectedText?.refId}/>}
-          {selectedText && <SectionNotes bookTitle={selectedText?.title} referenceId={selectedText?.refId} />}
+          {selectedText && <SectionNotes book={selectedText?.title} reference={selectedText?.refId} />}
         </div>
         <footer>
           <p>This software is licensed under GPL3</p>

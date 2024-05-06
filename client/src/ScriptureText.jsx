@@ -17,7 +17,7 @@ const ScriptureText = ({selection, onTextSelect}) => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    // console.log("Selection: ", selection);
+    console.log("Selection: ", selection);
     const {paperId, sectionId, paragraphId, partId} = selection;
 
     // handle highlighting of text
@@ -73,7 +73,7 @@ const ScriptureText = ({selection, onTextSelect}) => {
                     if(paragraphId) queryParams.append("paragraphId", paragraphId);
                 }
 
-                // console.log("Attempting to query the REST API with ", queryParams.toString());
+                console.log("Attempting to query the REST API with ", queryParams.toString());
                 const response = await fetch(`http://localhost:3001/api/ub?${queryParams.toString()}`);
                 if(!response.ok) {
                     throw new Error('Could not fetch data');
